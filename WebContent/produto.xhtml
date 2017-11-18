@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	
+	<h:head>
+		<title>Sistema de Notas Fiscais</title>
+		<h:outputStylesheet library="css" name="style.css"/>
+	</h:head>
+	
+	<h:body>
+		<div id="cabecalho">
+			<h:graphicImage id="logoCompany" library="imagens" name="logo-uber.png"/>
+			<div id="usuarioLogado">Logado como: #{loginMB.usuario.login}</div>
+		</div>
+		
+		<div id="conteudo">
+			<h:form id="form">
+				<h2>#{produtoMB.header}</h2>
+				
+				<fieldset>
+					<legend>Dados do Produto</legend>
+					<h:inputHidden id="id" value="#{produtoMB.produto.id}" />
+			
+					<h:outputLabel value="Nome:" for="nome" />
+					<h:inputText id="nome" value="#{produtoMB.produto.nome}" />
+		
+					<h:outputLabel value="Descricao:" for="desc" />
+					<h:inputTextarea id="desc" value="#{produtoMB.produto.descricao}" />
+		
+					<h:outputLabel value="Preco:" for="preco" />
+					<h:inputText id="preco" value="#{produtoMB.produto.preco}" />
+		
+					<h:commandButton value="Gravar" action="#{produtoMB.save}">
+						<f:ajax execute="@form" render="@all" />
+					</h:commandButton>
+					<h:commandButton value="Cancelar" action="#{produtoMB.newProduto}"
+						style="display:#{not empty produtoMB.produto.id ? 'block' : 'none'}"
+						immediate="true">
+						<f:ajax execute="@none" render="@form" />
+					</h:commandButton>
+				</fieldset>
+			</h:form>
+	
+			<h2>Listagem de Produtos</h2>
+			<h:form id="table">
+				<h:dataTable value="#{produtoMB.produtos}" var="produto"
+			    			 styleClass="dados" rowClasses="impar,par">
+					<h:column>
+						<f:facet name="header">ID</f:facet>
+							#{produto.id}
+						</h:column>
+					<h:column>
+						<f:facet name="header">Nome</f:facet>
+							#{produto.nome}
+						</h:column>
+					<h:column>
+						<f:facet name="header">Descricao</f:facet>
+							#{produto.descricao}
+							<f:facet name="footer">Total:</f:facet>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Preco</f:facet>
+							#{produto.preco}
+							<f:facet name="footer">
+							<h:outputLabel value="#{produtoMB.totalCost}" />
+						</f:facet>
+					</h:column>
+					<h:column>
+						<f:facet name="header">Acoes</f:facet>
+						<h:commandButton value="Remover" action="#{produtoMB.remove(produto)}">
+							<f:ajax execute="@this" render=":table" />
+						</h:commandButton>
+						<h:commandButton value="Alterar">
+							<f:ajax execute="@this" render=":form" />
+							<f:setPropertyActionListener value="#{produto}"
+								target="#{produtoMB.produto}" />
+						</h:commandButton>
+					</h:column>
+				</h:dataTable>
+			</h:form>
+		</div>
+		
+		<div id="rodape">
+			Copyright 2013.
+			Todos os Direitos reservados a ---Coloque seu nome aqui---.
+		</div>
+	</h:body>
+
+</html>
