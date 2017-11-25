@@ -12,7 +12,11 @@
 	<h:body>
 		<div id="cabecalho">
 			<h:graphicImage id="logoCompany" library="imagens" name="logo-uber.png"/>
-			<div id="usuarioLogado">Logado como: #{loginMB.usuario.login}</div>
+			<div id="usuarioLogado">
+				<h:form id="logout">
+					<h:commandButton value="Sair" action="#{loggedUserMB.deslogar}"/>
+				</h:form>
+			</div>
 		</div>
 		
 		<div id="conteudo">

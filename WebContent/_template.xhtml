@@ -1,0 +1,33 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+                      "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+	xmlns:ui="http://java.sun.com/jsf/facelets"
+	xmlns:f="http://java.sun.com/jsf/core"
+	xmlns:h="http://java.sun.com/jsf/html">
+	
+	<h:head>
+		<title>Sistema de Notas Fiscais</title>
+		<h:outputStylesheet library="css" name="style.css"/>
+	</h:head>
+	
+	<h:body>
+		<div id="cabecalho">
+			<h:graphicImage id="logoCompany" library="imagens" name="logo-uber.png"/>
+			<div id="usuarioLogado">
+				<h:form id="logout" rendered="#{loggedUserMB.loggedIn}">
+					Logado como: #{usuarioLogadoBean.usuario.login}
+					<h:commandButton value="[Sair]" action="#{loginMB.logout}"/>
+				</h:form>
+			</div>
+		</div>
+		
+		<div id="conteudo">
+			<ui:insert name="corpo"/>
+		</div>
+		
+		<div id="rodape">
+			Copyright 2013.
+			Todos os Direitos reservados a ---Coloque seu nome aqui---.
+		</div>
+	</h:body>
+</html>

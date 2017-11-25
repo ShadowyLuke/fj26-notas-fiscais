@@ -6,6 +6,9 @@
     version="2.2">
 	<lifecycle>
 		<phase-listener>
+			br.com.caelum.notasfiscais.listener.Authorization
+		</phase-listener>
+		<phase-listener>
 			br.com.caelum.notasfiscais.listener.LifeCycleListener
 		</phase-listener>
 	</lifecycle>
