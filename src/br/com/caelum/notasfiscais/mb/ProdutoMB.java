@@ -8,6 +8,7 @@ import javax.inject.Named;
 
 import br.com.caelum.notasfiscais.dao.ProdutoDao;
 import br.com.caelum.notasfiscais.modelo.Produto;
+import br.com.caelum.notasfiscais.tx.Transactional;
 
 @Named
 @RequestScoped
@@ -19,6 +20,7 @@ public class ProdutoMB {
 	private Produto produto = new Produto();
 	private List<Produto> produtos;
 	
+	@Transactional
 	public void save() {		
 		if(this.produto.getId() == null) {
 			dao.adiciona(produto);
@@ -68,7 +70,7 @@ public class ProdutoMB {
 	
 	public List<Produto> getProdutos() {
 		if(this.produtos == null) {
-			this.produtos = new ProdutoDao().listaTodos();
+			this.produtos = dao.listaTodos();
 		}
 		return produtos;
 	}

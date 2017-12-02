@@ -14,22 +14,16 @@ public class ProdutoDao {
 	EntityManager manager;
 	
 	public void adiciona(Produto produto) {
-		manager.getTransaction().begin();
 		manager.persist(produto);
-		manager.getTransaction().commit();
 	}
 
 
 	public void remove(Produto produto) {
-		manager.getTransaction().begin();
 		manager.remove(manager.merge(produto));
-		manager.getTransaction().commit();
 	}
 
 	public void atualiza(Produto produto) {
-		manager.getTransaction().begin();
 		manager.merge(produto);
-		manager.getTransaction().commit();
 	}
 
 	public List<Produto> buscaPorNome(String nome) {
@@ -40,7 +34,6 @@ public class ProdutoDao {
 	}
 
 	public List<Produto> listaTodos() {	
-		System.out.println("******************************" + manager);
 		CriteriaQuery<Produto> query = manager.getCriteriaBuilder().createQuery(Produto.class);
 		query.select(query.from(Produto.class));
 		return manager.createQuery(query).getResultList();

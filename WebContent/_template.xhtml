@@ -15,8 +15,8 @@
 			<h:graphicImage id="logoCompany" library="imagens" name="logo-uber.png"/>
 			<div id="usuarioLogado">
 				<h:form id="logout" rendered="#{loggedUserMB.loggedIn}">
-					Logado como: #{usuarioLogadoBean.usuario.login}
-					<h:commandButton value="[Sair]" action="#{loginMB.logout}"/>
+					Logado como: #{loggedUserMB.usuario.login}
+					<h:commandLink value="[Sair]" action="#{loginMB.logout}"/>
 				</h:form>
 			</div>
 		</div>
